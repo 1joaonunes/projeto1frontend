@@ -1,0 +1,51 @@
+[data-bs-theme="custom-made-theme"] {
+  --bs-body-color: var(--bs-white);
+  --bs-body-color-rgb: #{to-rgb($white)};
+  --bs-body-bg: var(--bs-blue);
+  --bs-body-bg-rgb: #{to-rgb($blue)};
+  --bs-tertiary-bg: #{$blue-600};
+}
+
+
+.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+
+.dark {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.dark .btn {
+  background-color: #333;
+  color: white;
+}
+
+.light .btn {
+  background-color: #ddd;
+  color: black;
+}
+
+.question{
+  background-color: grey;
+  width: max-content;
+  padding: 10px;
+  align-self: flex-end; 
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.answer{
+  text-align: left;
+align-self: flex-start; 
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.chatcontainer{
+  display: flex;
+  flex-direction: column;
+}

@@ -1,11 +1,10 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import Homepage from "./components/Homepage";
-import "./styles/theme.css";
-import { useState } from "react";
 import Login from "./components/Login";
 import { Route, Routes } from "react-router-dom";
-import AppGemini from "./components/AppGemini";
-import MainContent from "./components/MainContent";
+import Error from "./components/Error";
+import "./styles/theme.css";
+import Dashboard from "./components/Dashboard";
 
 export const ThemeContext = createContext<any>(null);
 
@@ -14,7 +13,15 @@ function App() {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <Homepage />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/Homepage" element={<Homepage />} />
+        <Route path="/Error" element={<Error />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
+
+        {/* (qualquer url inválido) */}
+        <Route path="*" element={<Error />} />
+      </Routes>
     </ThemeContext.Provider>
   );
 }

@@ -6,8 +6,8 @@ function Footer() {
   const theme = useContext(ThemeContext);
   return (
     <div data-bs-theme={theme}>
-      <div className="row border">
-        <div className="col-12">A1Pr0ject</div>
+      <div className="row" style={{ padding: "10px", textAlign: "center", borderTop: "1px solid grey" }}>
+        <div className="col-12">João Nunes, Frontend 2026</div>
       </div>
     </div>
   );

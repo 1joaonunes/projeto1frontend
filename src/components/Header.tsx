@@ -1,11 +1,15 @@
+function Header({ handleSignout }) {
+  return (
+    <div className="col-12 d-flex justify-content-between align-items-center p-2">
+      
+      <div className="fw-bold">A1Pr0ject</div>
 
+      <button className="btn btn-outline-danger btn-sm" onClick={handleSignout}>
+        Sair
+      </button>
 
-function Header(){
-    return(
-        <div className="row border">
-            <div className="col-12">A1Pr0ject</div>
-        </div>
-    )
+    </div>
+  );
 }
 
-export default Header
+export default Header;

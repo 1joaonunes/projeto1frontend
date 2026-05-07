@@ -1,15 +1,37 @@
-import Header from "./Header";
 import Content from "./Content";
-import Footer from "./Footer";
+import "firebase/auth";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../App";
-function Homepage () {
-    const { theme } = useContext(ThemeContext);
-    return (
-        <div className={`container-fluid text-center border ${theme}`}>
-            <Content />
-        </div>
-    );
+import { auth } from "../config/firebase";
+import { useEffect } from "react";
+import AppGemini from "./AppGemini";
+import Footer from "./Footer";
+
+function Homepage() {
+  const navigate = useNavigate();
+  const { theme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (!user) {
+      navigate("/Error");
+    }
+  }, [navigate]);
+
+  const handleSignout = () => {
+    auth.signOut();
+    navigate("/");
+  };
+
+  return (
+    <div className={`container-fluid text-center border ${theme}`}>
+      <div className="row">
+        <AppGemini handleSignout={handleSignout} />
+        <Footer />
+      </div>
+    </div>
+  );
 }
 
 export default Homepage;

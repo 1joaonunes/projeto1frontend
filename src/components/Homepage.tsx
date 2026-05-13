@@ -1,4 +1,3 @@
-import Content from "./Content";
 import "firebase/auth";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";

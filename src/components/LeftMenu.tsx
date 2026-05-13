@@ -11,7 +11,6 @@ function LeftMenu({ data }: LeftMenuProps) {
   const navigate = useNavigate();
 
   console.log("Context color is " + themeContext.theme);
-  const totalMessages = data?.length || 0;
   return (
     <div
       className="col-3"
@@ -27,10 +26,9 @@ function LeftMenu({ data }: LeftMenuProps) {
         <button
           type="button"
           onClick={() =>
-            navigate("/Dashboard", { state: { totalMessages: data.length } })
+            navigate("/Dashboard")
           }
-          className="btn btn-primary"
-          style={buttonStyle}
+          className="btn btn-primary buttonstyle"
         >
           Dashboard
         </button>
@@ -64,8 +62,7 @@ function LeftMenu({ data }: LeftMenuProps) {
           onClick={() => {
             themeContext.setTheme("light");
           }}
-          className="btn btn-primary"
-          style={buttonStyle}
+          className="btn btn-primary buttonstyle"
         >
           Modo claro
         </button>
@@ -74,8 +71,7 @@ function LeftMenu({ data }: LeftMenuProps) {
           onClick={() => {
             themeContext.setTheme("dark");
           }}
-          className="btn btn-primary"
-          style={buttonStyle}
+          className="btn btn-primary buttonstyle"
         >
           Modo escuro
         </button>
@@ -84,7 +80,7 @@ function LeftMenu({ data }: LeftMenuProps) {
           onClick={() => {
             themeContext.setTheme("custom-made-theme");
           }}
-          className="btn btn-primary"
+          className="btn btn-primary buttonstyle"
         >
           Modo azul
         </button>
@@ -92,10 +88,5 @@ function LeftMenu({ data }: LeftMenuProps) {
     </div>
   );
 }
-const buttonStyle = {
-  marginBottom: "5px",
-  whiteSpace: "normal",
-  wordBreak: "break-word",
-};
 
 export default LeftMenu;

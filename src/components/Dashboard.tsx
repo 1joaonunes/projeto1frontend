@@ -1,8 +1,10 @@
-import { useLocation } from 'react-router-dom';
+import { ChatContext } from "./ChatContext";
+import { useContext } from 'react';
 
 function Dashboard() {
-  const location = useLocation();
-   const totalMessages = location.state?.totalMessages || 0;
+   const { messages, apiResponseTime } =
+    useContext(ChatContext);
+
   return (
     <div style={{ padding: "20px" }}>
       <div style={{display: "flex", justifyContent: "space-between"}}>
@@ -14,28 +16,14 @@ function Dashboard() {
       <div
         style={{
           display: "flex",
-          gap: "15px",
-          marginTop: "20px",
-          flexWrap: "wrap",
+          marginTop: "20px"
         }}
       >
         <div style={cardStyle}>
           <h3>Mensagens totais</h3>
-          <p style={valueStyle}>{totalMessages}</p>
-        </div>
-
-        <div style={cardStyle}>
-          <h3>Tempo médio de resposta</h3>
-          <p style={valueStyle}>?ms</p>
-        </div>
-      </div>
-
-      {/* Gráfico */}
-      <div style={chartCard}>
-        <h3 style={{ marginBottom: "10px" }}>Gráfico não sei de quê
-        </h3>
-        <div style={chartPlaceholder}>
-          [ Aqui vai o gráfico ]
+          <p style={valueStyle}>{messages.length}</p>
+          <h3>Tempo de resposta da API</h3>
+          <p style={valueStyle}>{apiResponseTime} ms</p>
         </div>
       </div>
     </div>

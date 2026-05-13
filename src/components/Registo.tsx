@@ -1,23 +1,23 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 import "../styles/theme.css";
 
-function Login() {
+function Registo() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleRegisto = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      setAlert("Login efetuado com sucesso!");
+      await createUserWithEmailAndPassword(auth, email, password);
+      setAlert("Registo efetuado com sucesso!");
       navigate("/Homepage");
     } catch (error) {
-      setAlert("Erro no login. Dados incorretos.");
+      setAlert(" Erro no registo. Tente novamente.");
     }
   };
 
@@ -30,9 +30,10 @@ function Login() {
         className="card shadow p-4"
         style={{ width: "100%", maxWidth: "400px", borderRadius: "12px" }}
       >
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleRegisto}>
           <h2 className="text-center mb-4">A1Pr0ject</h2>
-<p className="text-center mb-4">Login</p>
+          <p className="text-center mb-4">Registo</p>
+
           {alert && (
             <div className="alert alert-info text-center py-2">
               {alert}
@@ -66,18 +67,18 @@ function Login() {
           </div>
 
           <button className="btn btn-primary w-100 py-2" type="submit">
-            Entrar
+            Registar
           </button>
 
           <p className="text-center mt-4 text-muted small">
-            Ainda não tem conta? Crie <a
-          type="button"
+            Já tem conta? Faça login <a
           onClick={() =>
-            navigate("/Registo")
+            navigate("/Login")
           }
           style={{fontWeight:"bolder", cursor:"pointer"}}
         >aqui</a>
           </p>
+
 
           <p className="text-center mt-4 text-muted small">
             &copy; João Nunes 2026
@@ -88,4 +89,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Registo;

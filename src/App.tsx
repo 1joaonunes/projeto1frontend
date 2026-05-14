@@ -14,7 +14,7 @@ function App() {
   const [theme, setTheme] = useState("light");
   const [messages, setMessages] = useState([]);
   const [apiResponseTime, setApiResponseTime] = useState(0);
-
+  const [errorCount, setErrorCount] = useState(0);
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <ChatContext.Provider
@@ -23,6 +23,8 @@ function App() {
           setMessages,
           apiResponseTime,
           setApiResponseTime,
+          errorCount,
+          setErrorCount
         }}
       >
         <Routes>

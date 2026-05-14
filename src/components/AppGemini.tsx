@@ -11,11 +11,12 @@ export default function AppGemini({ handleSignout }) {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
   const {
-  messages,
-  setMessages,
-  apiResponseTime,
-  setApiResponseTime,
-} = useContext(ChatContext);
+    messages,
+    setMessages,
+    apiResponseTime,
+    setApiResponseTime,
+    setErrorCount,
+  } = useContext(ChatContext);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -42,16 +43,14 @@ export default function AppGemini({ handleSignout }) {
       const result = await model.generateContent(history);
 
       const endTime = performance.now();
-      setApiResponseTime((endTime - startTime).toFixed(2));
+      setApiResponseTime(((endTime - startTime) / 1000).toFixed(2));
 
       const aiText = result.response.text();
 
-      setMessages([
-        ...updatedMessages,
-        { role: "ai", text: aiText },
-      ]);
+      setMessages([...updatedMessages, { role: "ai", text: aiText }]);
     } catch (error) {
       console.error("Erro completo:", error);
+      setErrorCount((prev) => prev + 1);
 
       setMessages([
         ...updatedMessages,
@@ -94,17 +93,14 @@ export default function AppGemini({ handleSignout }) {
           <Header handleSignout={handleSignout} />
 
           <div style={{ flex: 1, overflowY: "auto", padding: "10px" }}>
-            {messages.length === 0 && (
-              <div>O que deseja saber?</div>
-            )}
+            {messages.length === 0 && <div>O que deseja saber?</div>}
 
             {messages.map((msg, index) => (
               <div
                 key={index}
                 style={{
                   marginBottom: "10px",
-                  textAlign:
-                    msg.role === "user" ? "right" : "left",
+                  textAlign: msg.role === "user" ? "right" : "left",
                 }}
               >
                 <span
@@ -112,14 +108,8 @@ export default function AppGemini({ handleSignout }) {
                     display: "inline-block",
                     padding: "10px",
                     borderRadius: "10px",
-                    background:
-                      msg.role === "user"
-                        ? "#007bff"
-                        : "#eee",
-                    color:
-                      msg.role === "user"
-                        ? "white"
-                        : "black",
+                    background: msg.role === "user" ? "#007bff" : "#eee",
+                    color: msg.role === "user" ? "white" : "black",
                     maxWidth: "70%",
                     wordBreak: "break-all",
                   }}
@@ -141,9 +131,7 @@ export default function AppGemini({ handleSignout }) {
             <input
               type="text"
               value={prompt}
-              onChange={(e) =>
-                setPrompt(e.target.value)
-              }
+              onChange={(e) => setPrompt(e.target.value)}
               placeholder="Escreva uma mensagem..."
               style={{
                 flex: 1,
